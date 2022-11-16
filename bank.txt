@@ -1,23 +1,33 @@
-pragma solidity ^0.4.19;
+pragma solidity 0.4.25;
 
-contract TipJar {
+contract Bank
+{
+    int bal;
 
-    address owner;   
-
-    function Tipjar() public { 
-        owner = msg.sender;
+    constructor() public
+    {
+        bal = 10;
     }
 
-    function withdraw() public {
-        require(owner == msg.sender);
-        msg.sender.transfer(address(this).balance);
+    function getBalance() view public returns(int)
+    {
+        return bal;
     }
 
-    function deposit(uint256 amount) public payable {
-        require(msg.value == amount);
+    function withdraw(int amt) public
+    {
+        if(bal<amt)
+        {
+            bal;
+        }
+        else
+        {
+            bal = bal - amt;
+        }
     }
 
-    function getBalance() public view returns (uint256) {
-        return address(this).balance;
+    function deposit(int amt) public
+    {
+        bal = bal + amt;
     }
 }
